@@ -1,0 +1,39 @@
+*{
+    font-family: 'Nanum Pen Script', cursive;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body{
+    position:fixed;
+    width:100vw;
+    height:100vh;
+}
+
+.container{
+    width:100%;
+    height:100%;
+    background: rgba(247,237,247,1);  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, rgb(167, 155, 221), rgba(247,237,247,1));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, rgb(167, 155, 221), rgba(247,237,247,1)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    position:relative;
+}
+
+#main{
+    background-color: whitesmoke;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    border-radius: 50px;
+}
+
+#goq1{
+    position:absolute;
+    right:30px;
+    bottom:20px;
+}
+p{
+    font-size: 16px;
+}
+.small{
+    font-size: 12px;
+}
