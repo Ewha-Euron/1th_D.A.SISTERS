@@ -1,0 +1,26 @@
+{% extends 'q_base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/q2.css' %}">
+{% endblock %}
+
+{% block question %}
+<div class="q_num">
+    <span id="q1">01</span>
+    <span id="q2">02</span>
+    <span id="q3">03</span>
+</div>
+
+<p class="q_text">작품을 볼 때,<br>
+가장 중요하게 생각하는 요소 <span style="color:#FFE588;">3개</span>는</p>
+{% endblock %}
+
+{% block content %}
+
+
+
+<a type='button' class="next" href="{% url 'q3' %}">
+    다음으로
+</a>
+{% endblock %}
