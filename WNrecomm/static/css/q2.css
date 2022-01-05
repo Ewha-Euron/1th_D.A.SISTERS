@@ -1,0 +1,19 @@
+:root {
+    --main-color: #796BD3;
+    --dark-main-color: #6152C2;
+    --accent-color: #FFE588;
+    --sub-color: #D1D1D1;
+    --bg-color: #FFFFFF;
+}
+
+#q1{
+    color: var(--dark-main-color);
+}
+
+#q2{
+    color: var(--bg-color);
+}
+
+#q3{
+    color: var(--dark-main-color);
+}

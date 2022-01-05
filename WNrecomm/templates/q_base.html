@@ -17,18 +17,26 @@
       />
 
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        {% block css %}
+        {% endblock %}
     </head>
     <body>
         <div class="container"> 
-            <img class="logo" src="{% static 'img/main_logo.svg' %}" alt="main_logo">
-            <p class="t1">이미 본 웹소설을 평가하면<br>
-               새로운 로맨스 웹소설을 추천해드려요.</p>
-            <p class="t2">*리디북스 데이터 기반</p>
-            <div class="updown"></div>
-            <a type='button' class="btn" href="{% url 'q1' %}">
-                추천받기
-            </a>
-            <p class="t3">본 프로젝트는 이화여자대학교 교내동아리 Euron에서 제공합니다.</p>
+            <a href="javascript:history.back()">뒤로가기</a>
+            {% block question %}
+            <div class="q_num">
+                <span class="q1">01</span>
+                <span class="q2">02</span>
+                <span class="q3">03</span>
+            </div>
+
+            <p class="q_text">텍스트</p>
+            {% endblock %}
+        </div>
+        <div class="main mx-auto">
+            {% block content %}
+            <a type='button' class="next" href="{% url 'q2' %}"></a>
+            {% endblock %}
         </div>
     </body>
 </html>

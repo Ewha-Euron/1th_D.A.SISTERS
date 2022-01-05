@@ -1,20 +1,49 @@
-*{
-    font-family: 'Nanum Pen Script', cursive;
-    font-family: 'Noto Sans KR', sans-serif;
+:root {
+    --main-color: #796BD3;
+    --dark-main-color: #6152C2;
+    --accent-color: #FFE588;
+    --sub-color: #D1D1D1;
+    --bg-color: #FFFFFF;
 }
 
-body{
-    width:100vw;
-    height:100vh;
-}
-.container{
-    width:100%;
-    height:100%;
-    position:relative;
+#q1{
+    color: var(--bg-color);
 }
 
-#goq1{
-    position:absolute;
-    right:30px;
-    bottom:20px;
+#q2{
+    color: var(--dark-main-color);
+}
+
+#q3{
+    color: var(--dark-main-color);
+}
+
+.main>p{
+    text-align: center;
+    color:black;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+img{
+    background: var(--sub-color);
+    border-radius: 18px;
+    width:120px;
+    height:120px;
+    padding:10px;
+}
+
+.option{
+    display: flex;
+    justify-content: space-around;
+    padding: 0px 20px 0px 20px;
+}
+
+.label{
+    text-align: center;
+    padding: 0px 20px 0px 20px;
+}
+
+.main>div>span{
+    margin: 0px 60px 0px 60px;
 }
