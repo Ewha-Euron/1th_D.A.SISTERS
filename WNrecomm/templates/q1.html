@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{% static 'css/q1.css' %}">
 {% endblock %}
 
+<!-- 질문 보라색 부분 -->
 {% block question %}
 <div class="q_num">
     <span id="q1">01</span>
@@ -15,30 +16,62 @@
 <p class="q_text">어떤 작품으로 추천할까요?</p>
 {% endblock %}
 
+<!-- 질문 하얀색 부분 -->
 {% block content %}
-<p>성인 작품 추천받기</p>
-<div class="option">
-    <img class="adult" src="{% static 'img/adult.svg' %}" alt="adult">            
-    <img class="child" src="{% static 'img/child.svg' %}" alt="child">
-</div>
-<div class="label">
-    <span>YES</span>
-    <span>NO</span> 
-</div>
+<form action="{% url 'q2' %}" method="get">
+    <p>성인 작품 추천받기</p>
+    <table class="mx-auto">
+        <tr>
+            <td height = "0">
+                <input type="radio" name="adultchild" id="adult" class="select_btn" value="adult"/>
+                <label for="adult">
+                    <img src = "{% static 'img/adult.svg' %}" height = "100%">
+                </label>
+            </td>
+            <td height = "0">
+                <input type="radio" name="adultchild" id="child" class="select_btn" value="child"/>
+                <label for="child">
+                    <img src = "{% static 'img/child.svg' %}" height = "100%">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>YES</span>
+            </td>
+            <td>
+                <span>NO</span>
+            </td>
+        </tr>
+    </table>
+    
+    <p>완결 작품만 추천받기</p>
+    <table class="mx-auto">
+        <tr>
+            <td height = "0">
+                <input type="radio" name="finished" id="finished" class="select_btn" value="finished"/>
+                <label for="finished">
+                    <img src = "{% static 'img/adult.svg' %}" height = "100%">
+                </label>
+            </td>
+            <td height = "0">
+                <input type="radio" name="finished" id="unfinished" class="select_btn" value="unfinished"/>
+                <label for="unfinished">
+                    <img src = "{% static 'img/child.svg' %}" height = "100%">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>YES</span>
+            </td>
+            <td>
+                <span>NO</span>
+            </td>
+        </tr>
+    </table>
+    
+    <input type='image' class="next_btn btn" src="{% static 'img/next_btn.svg' %}">
+</form>
 
-
-<p>완결 작품만 추천받기</p>
-<div class="option">
-    <img class="adult" src="{% static 'img/adult.svg' %}" alt="adult">            
-    <img class="child" src="{% static 'img/child.svg' %}" alt="child">
-</div>
-<div class="label">
-    <span>YES</span>
-    <span>NO</span> 
-</div>
-
-
-<a type='button' class="next" href="{% url 'q2' %}">
-    다음으로
-</a>
-{% endblock %}
+{% endblock %} 

@@ -18,32 +18,42 @@
     color: var(--dark-main-color);
 }
 
-.main>p{
+.main>form>p{
     text-align: center;
     color:black;
     font-weight: bold;
     margin-top: 25px;
+    font-size: 20px;
 }
 
-img{
+.select_btn{
+    position:absolute;
+    opacity:0;
+}
+
+input[type=radio]:hover + label>img {
+    transform: translateY(-5px);
+}
+
+input[type=radio] + label>img{
     background: var(--sub-color);
     border-radius: 18px;
-    width:120px;
-    height:120px;
+    width:31.250vw;
+    height:31.250vw;
     padding:10px;
 }
 
-.option{
-    display: flex;
-    justify-content: space-around;
-    padding: 0px 20px 0px 20px;
+input[type=radio]:checked + label>img {
+    background: var(--accent-color);
 }
 
-.label{
+table{
     text-align: center;
-    padding: 0px 20px 0px 20px;
+    border-spacing: 20px 0;
+    border-collapse: separate;
 }
 
-.main>div>span{
-    margin: 0px 60px 0px 60px;
+table span{
+    margin: 0;
+    font-size: 15px;
 }

@@ -13,14 +13,63 @@
 </div>
 
 <p class="q_text">작품을 볼 때,<br>
-가장 중요하게 생각하는 요소 <span style="color:#FFE588;">3개</span>는</p>
+가장 중요하게 생각하는 요소 <strong style="color:#FFE588;">3개</strong>는</p>
 {% endblock %}
 
 {% block content %}
+<p style="color:#796BD3;">*우선 순위대로 선택해주세요</p>
 
+<form action="{% url 'q3' %}" method="get">
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="1" value="1">
+        <label for="1">좋아요 수</label>
+    </div>
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="2" value="2">
+        <label for="2">평균 별점</label>        
+    </div>
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="3" value="3">
+        <label for="3">전체 리뷰 수</label>        
+    </div>
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="4" value="4">
+        <label for="4">구매자 수</label>
+    </div>
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="5" value="5">
+        <label for="5">무료 공개 회차</label>
+    </div>
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="6" value="6">
+        <label for="6">기다무(기다리면 무료)</label>
+    </div>
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="7" value="7">
+        <label for="7">키워드 및 소개</label>
+    </div>
 
+    <input type='image' class="next_btn btn" src="{% static 'img/next_btn.svg' %}">
+</form>
+{% endblock %}
 
-<a type='button' class="next" href="{% url 'q3' %}">
-    다음으로
-</a>
+{% block script %}
+<script>
+    var maxCount=3;
+    var cnt=0;
+
+    function CountChecked(field){
+        if (field.checked){
+            cnt += 1;
+        }
+        else{
+            cnt -= 1;
+        }
+        if (cnt > maxCount){
+            alert("최대 3개까지 선택가능합니다.");
+            field.checked = false;
+            cnt -=1;
+        }
+    }
+</script>
 {% endblock %}

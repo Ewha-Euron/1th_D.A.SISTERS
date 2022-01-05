@@ -22,7 +22,7 @@
     </head>
     <body>
         <div class="container"> 
-            <a href="javascript:history.back()">뒤로가기</a>
+            <a href="javascript:history.back()"><img class="back_btn" src="{% static 'img/arrow-left.svg' %}"></a>
             {% block question %}
             <div class="q_num">
                 <span class="q1">01</span>
@@ -35,10 +35,14 @@
         </div>
         <div class="main mx-auto">
             {% block content %}
-            <a type='button' class="next" href="{% url 'q2' %}"></a>
+            <a type='button' href="{% url 'q2' %}">
+                <img class="next_btn btn" src="{% static 'img/next_btn.svg' %}">
+            </a>
             {% endblock %}
         </div>
     </body>
+    {% block script %}
+    {% endblock %}
 </html>
 
 

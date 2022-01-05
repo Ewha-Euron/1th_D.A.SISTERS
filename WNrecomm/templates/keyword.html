@@ -1,1 +1,24 @@
- 
+{% extends 'q_base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/q2.css' %}">
+{% endblock %}
+
+{% block question %}
+<div class="q_num">
+    <span id="q1">01</span>
+    <span id="q2">02</span>
+    <span id="q3">03</span>
+</div>
+
+<p class="q_text">
+    <strong style="color:#FFE588;">키워드가 중요하다면,</strong><br>
+    내가 좋아하는 키워드는</p>
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'q3' %}" method="get">
+    <input type='image' class="next_btn btn" src="{% static 'img/next_btn.svg' %}">
+</form>
+{% endblock %}

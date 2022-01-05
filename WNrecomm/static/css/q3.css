@@ -10,17 +10,12 @@
     color: var(--dark-main-color);
 }
 #q2{
-    color: var(--bg-color);
+    color: var(--dark-main-color);    
 }
 #q3{
-    color: var(--dark-main-color);
-}
-.main>p{
-    font-size: 15px;
-    color:black;
-    margin-top: 15px;
+    color: var(--bg-color);
 }
 
-form>div{
-    margin:15px;
+.search_btn{
+    position:absolute;
 }

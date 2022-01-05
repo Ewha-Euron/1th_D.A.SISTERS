@@ -17,7 +17,13 @@ def keyword(request):
     return render(request, 'keyword.html')
 
 def q3(request):
-    return render(request, 'q3.html')
+    if request.method == 'GET':
+        selected = request.GET.getlist('impt')
+        print(selected)
+        if '7' in selected:
+            return render(request, 'keyword.html')
+        else:
+            return render(request, 'q3.html')
 
 def result(request):
     return render(request, 'result.html')

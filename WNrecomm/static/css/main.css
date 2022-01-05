@@ -30,16 +30,20 @@ body{
     height: 21.429vh;
     top: 8.621vh;
 }
-p{
+
+
+.container>p{
     font-weight: 500;
+    font-size: 20px;
     color: var(--bg-color);
 }
+
 .t1{
     position: absolute;
     left: 36px;
     top: 288px;
 
-    font-size: 15px;
+    font-size: 15px !important;
     line-height: 170%;
 }
 
@@ -48,14 +52,14 @@ p{
     left: 36px;
     top: 346px; 
 
-    font-size: 11px;
+    font-size: 11px !important;
     line-height: 170%;
 }
 
 .t3{
     position: absolute;
     bottom : 30px;
-    font-size: 10px;
+    font-size: 10px !important;
 }
 
 .updown { 
@@ -66,35 +70,19 @@ p{
     height: 30%; 
 }
 
-.btn{
-    background: var(--accent-color);
-    border-radius: 28px;
-    font-weight: 400;
-    color: var(--main-color);
-    padding: 10px;
-    width: 100px;
-    
-    position: absolute;
-    top:658px;
+.back_btn{
+    width:6.250vw;
+}
+
+.start_btn{
+    width: 40vw;
+    position:absolute;
+    bottom:15.691vh;
     transition: all 0.3s ease 0s;
 }
 
-.btn:hover {
-    background-color: var(--accent-color);
-    box-shadow: 0px 4px 8px #fff3cb;
-    color: var(--main-color);
-    transform: translateY(-5px);
-}
-
-.next{
-    text-decoration: none;
-    background: var(--bg-color);
-    border-radius: 28px;
-    font-weight: 400;
-    color: var(--main-color);
-    border: 1px solid var(--main-color); 
-    padding: 10px;
-    width: 100px;
+.next_btn{
+    width: 28.646vw;
     
     position: absolute;
     top:507px;
@@ -102,10 +90,8 @@ p{
     transition: all 0.3s ease 0s;
 }
 
-.next:hover{
-    text-decoration: none;
-    background-color: var(--main-color);
-    color: var(--bg-color);
+.btn:hover{
+    transform: translateY(-5px);
 }
 
 .q_num{
@@ -125,6 +111,6 @@ span{
     position:absolute;
     left: 0px;
     top: 30vh;
-    padding: 16px;
+    padding: 30px;
 }
 
