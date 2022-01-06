@@ -36,15 +36,8 @@ input[type=radio]:hover + label>img {
 }
 
 input[type=radio] + label>img{
-    background: var(--sub-color);
-    border-radius: 18px;
     width:31.250vw;
     height:31.250vw;
-    padding:10px;
-}
-
-input[type=radio]:checked + label>img {
-    background: var(--accent-color);
 }
 
 table{
