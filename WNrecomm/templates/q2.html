@@ -37,19 +37,15 @@
         <label for="4">구매자 수</label>
     </div>
     <div>
-        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="5" value="5">
-        <label for="5">무료 공개 회차</label>
-    </div>
-    <div>
         <input onclick="CountChecked(this)" type="checkbox" name="impt" id="6" value="6">
-        <label for="6">기다무(기다리면 무료)</label>
+        <label for="6">기다무(기다리면 무료) 여부</label>
     </div>
     <div>
         <input onclick="CountChecked(this)" type="checkbox" name="impt" id="7" value="7">
         <label for="7">키워드 및 소개</label>
     </div>
 
-    <input type='image' class="next_btn btn" src="{% static 'img/next_btn.svg' %}">
+    <input type='image' class="next_btn btn" src="{% static 'img/next_btn.svg' %}" disabled>
 </form>
 {% endblock %}
 
@@ -57,6 +53,7 @@
 <script>
     var maxCount=3;
     var cnt=0;
+    var button = document.getElementsByClassName('next_btn')[0];
 
     function CountChecked(field){
         if (field.checked){
@@ -64,6 +61,14 @@
         }
         else{
             cnt -= 1;
+        }
+        if(cnt<=0){
+            button.src = `{% static 'img/next_btn.svg' %}`;
+            button.disabled="disabled";
+        }
+        if(cnt>0){
+            button.src = `{% static 'img/next_btn_act.svg' %}`;
+            button.disabled=false;
         }
         if (cnt > maxCount){
             alert("최대 3개까지 선택가능합니다.");

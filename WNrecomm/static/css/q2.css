@@ -22,5 +22,13 @@
 }
 
 form>div{
-    margin:15px;
+    margin:20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+form>div>input{
+    display:none;
+}
+form>div>input:checked + label{
+    color:var(--main-color);
 }
