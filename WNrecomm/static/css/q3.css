@@ -6,14 +6,9 @@
     --bg-color: #FFFFFF;
 }
 
-#q1{
-    color: var(--dark-main-color);
-}
-#q2{
-    color: var(--dark-main-color);    
-}
-#q3{
-    color: var(--bg-color);
+.c1, .l1, .c2, .l2, .c3{
+    background: var(--accent-color);
+    color:var(--accent-color);
 }
 
 .search_btn{
