@@ -5,19 +5,9 @@
     --sub-color: #D1D1D1;
     --bg-color: #FFFFFF;
 }
-
-#q1{
-    color: var(--bg-color);
+.c1{
+    background: var(--accent-color);
 }
-
-#q2{
-    color: var(--dark-main-color);
-}
-
-#q3{
-    color: var(--dark-main-color);
-}
-
 .main>form>p{
     text-align: center;
     color:black;

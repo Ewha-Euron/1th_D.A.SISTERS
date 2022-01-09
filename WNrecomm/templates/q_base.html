@@ -24,10 +24,19 @@
         <div class="container"> 
             <a href="javascript:history.back()"><img class="back_btn" src="{% static 'img/arrow-left.svg' %}"></a>
             {% block question %}
-            <div class="q_num">
-                <span class="q1">01</span>
-                <span class="q2">02</span>
-                <span class="q3">03</span>
+            <div class="progress">
+                <div class="p1">
+                    <div class="circle c1"></div>
+                    <hr class="line l1">
+                    <div class="circle c2"></div>
+                    <hr class="line l2">
+                    <div class="circle c3"></div>
+                </div>
+                <div class="p2">
+                    <p class="index">FILTER</p>
+                    <p class="index">TASTE</p>
+                    <p class="index">RATING</p>
+                </div>
             </div>
 
             <p class="q_text">텍스트</p>

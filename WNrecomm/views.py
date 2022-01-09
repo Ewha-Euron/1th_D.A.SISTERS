@@ -20,7 +20,7 @@ def q3(request):
     if request.method == 'GET':
         selected = request.GET.getlist('impt')
         print(selected)
-        if '7' in selected:
+        if '6' in selected:
             return render(request, 'keyword.html')
         else:
             return render(request, 'q3.html')
