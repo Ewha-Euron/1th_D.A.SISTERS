@@ -23,15 +23,15 @@
     <table class="mx-auto">
         <tr>
             <td height = "0">
-                <input type="radio" name="adultchild" id="adult" class="select_btn" value="adult"/>
-                <label for="adult">
-                    <img src = "{% static 'img/adult.svg' %}" height = "100%">
+                <input type="radio" name="adultchild" id="adult_yes" class="select_btn" value="adult_yes" onclick="checkRadio()"/>
+                <label for="adult_yes">
+                    <img class="adult_yes" src = "{% static 'img/adult_yes.svg' %}" height = "100%">
                 </label>
             </td>
             <td height = "0">
-                <input type="radio" name="adultchild" id="child" class="select_btn" value="child"/>
-                <label for="child">
-                    <img src = "{% static 'img/child.svg' %}" height = "100%">
+                <input type="radio" name="adultchild" id="adult_no" class="select_btn" value="adult_no" onclick="checkRadio()"/>
+                <label for="adult_no">
+                    <img class="adult_no"src = "{% static 'img/adult_no.svg' %}" height = "100%">
                 </label>
             </td>
         </tr>
@@ -49,15 +49,15 @@
     <table class="mx-auto">
         <tr>
             <td height = "0">
-                <input type="radio" name="finished" id="finished" class="select_btn" value="finished"/>
-                <label for="finished">
-                    <img src = "{% static 'img/adult.svg' %}" height = "100%">
+                <input type="radio" name="finished" id="finish_yes" class="select_btn" value="finish_yes" onclick="checkRadio()"/>
+                <label for="finish_yes">
+                    <img class="finish_yes" src = "{% static 'img/finish_yes.svg' %}" height = "100%">
                 </label>
             </td>
             <td height = "0">
-                <input type="radio" name="finished" id="unfinished" class="select_btn" value="unfinished"/>
-                <label for="unfinished">
-                    <img src = "{% static 'img/child.svg' %}" height = "100%">
+                <input type="radio" name="finished" id="finish_no" class="select_btn" value="finish_no" onclick="checkRadio()"/>
+                <label for="finish_no">
+                    <img class="finish_no" src = "{% static 'img/finish_no.svg' %}" height = "100%">
                 </label>
             </td>
         </tr>
@@ -71,7 +71,28 @@
         </tr>
     </table>
     
-    <input type='image' class="next_btn btn" src="{% static 'img/next_btn.svg' %}">
+    <input type='image' class="next_btn btn" src="{% static 'img/next_btn.svg' %}" disabled>
 </form>
 
 {% endblock %} 
+
+{% block script %}
+<script>
+    function checkRadio(){
+        var adult = document.getElementsByName('adultchild');
+        var finish = document.getElementsByName('finished');
+        for(i=0;i<2;i++){
+            if(adult[i].checked==true){
+                for(j=0;j<2;j++){
+                    if(finish[j].checked==true){
+                        var button = document.getElementsByClassName('next_btn')[0];
+                        button.src = `{% static 'img/next_btn_act.svg' %}`;
+                        button.disabled=false;
+                    }
+                }
+            }
+        }
+    }
+
+</script>
+{% endblock %}
