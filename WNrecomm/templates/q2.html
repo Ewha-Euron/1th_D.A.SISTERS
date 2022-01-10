@@ -46,14 +46,14 @@
         <label for="4">구매자 수</label>
     </div>
     <div>
-        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="6" value="6">
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="5" value="5">
         <label for="5">기다무(기다리면 무료) 여부</label>
     </div>
     <div>
-        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="7" value="7">
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="6" value="6">
         <label for="6">키워드 및 소개</label>
     </div>
-
+    <input type="hidden" id="chb" name="chb" value="">
     <input type='image' class="next_btn btn" src="{% static 'img/next_btn.svg' %}" disabled>
 </form>
 {% endblock %}
@@ -63,13 +63,38 @@
     var maxCount=3;
     var cnt=0;
     var button = document.getElementsByClassName('next_btn')[0];
+    var hidden = document.getElementById('chb');
+    var chk = [];
 
     function CountChecked(field){
+        var parent = field.parentNode;
         if (field.checked){
             cnt += 1;
+            chk.push(field.value);
+            if(chk.length<=3){
+                var newImg = document.createElement('img');
+                newImg.classList.add(cnt);
+                newImg.src = `{% get_static_prefix %}img/${cnt}.svg`;
+                parent.appendChild(newImg);
+                //<img src="{% static 'img/1.svg' %}" alt="1st">
+            }
         }
         else{
+            const idx = chk.indexOf(field.value);
             cnt -= 1;
+            if (idx > -1) chk.splice(idx, 1);
+
+            var newImg = document.getElementsByClassName(idx+1)[0];
+            //console.log(newImg);
+            parent.removeChild(newImg);
+
+            for(var i=1;i<chk.length+1;i++){
+                var div = document.querySelector(`form div:nth-child(${chk[i-1]})`);
+                console.log(div.children[2]);
+                div.children[2].className = i;
+                div.children[2].src = `{% get_static_prefix %}img/${i}.svg`;
+
+            }
         }
         if(cnt<=0){
             button.src = `{% static 'img/next_btn.svg' %}`;
@@ -79,11 +104,14 @@
             button.src = `{% static 'img/next_btn_act.svg' %}`;
             button.disabled=false;
         }
-        if (cnt > maxCount){
+        if (chk.length>3){
             alert("최대 3개까지 선택가능합니다.");
             field.checked = false;
             cnt -=1;
+            chk.pop();
         }
+        console.log(chk);
+        hidden.value = chk;
     }
 </script>
 {% endblock %}
