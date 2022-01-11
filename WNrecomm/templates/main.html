@@ -19,11 +19,12 @@
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
     </head>
     <body>
-        <div class="container" id="home"> 
+        <div class="container" id="home">
+            <div class = 'maindes'>
             <img class="logo" src="{% static 'img/main_logo.svg' %}" alt="main_logo">
             <p class="t1">이미 본 웹소설을 평가하면<br>
                새로운 로맨스 웹소설을 추천해드려요.</p>
-            <p class="t2">*리디북스 데이터 기반</p>
+            <p class="t2">*리디북스 데이터 기반</p></div>
             <div class="updown"></div>
             <a type='button' href="{% url 'q1' %}">
             <img class="start_btn btn" src="{% static 'img/start_btn.svg' %}" alt="">
