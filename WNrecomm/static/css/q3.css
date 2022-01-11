@@ -14,3 +14,14 @@
 .search_btn{
     position:absolute;
 }
+
+.search{
+    border: none;
+    border-bottom :1px solid black;
+    color:black;
+    width:274px;
+    padding:10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+}

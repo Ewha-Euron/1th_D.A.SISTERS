@@ -48,7 +48,7 @@ body{
     /* left: 8vw; */
 }
 
-.container>p{
+.q_text{
     font-weight: 500;
     font-size: 20px;
     color: var(--bg-color);
@@ -145,11 +145,11 @@ body{
     transition: all 0.3s ease 0s;
 }
 
-.next_btn{
-    width: 31.25vw;
-    
+
+.next_btn, .home_btn{
+    width: 28.646vw;    
     position: absolute;
-    top:507px;
+    top:550px;
     right:16px;
     transition: all 0.3s ease 0s;
 }
