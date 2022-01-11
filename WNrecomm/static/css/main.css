@@ -30,13 +30,23 @@ body{
     padding: 10vw;
 }
 
-.logo{
+.maindes{
     position: absolute;
-    width: 49.067vw;
-    height: 21.429vh;
     top: 8.621vh;
+    width: 100%;
+    height: auto;
+    color: var(--bg-color);
+
 }
 
+.logo{
+    /* position: absolute; */
+    left: 0;
+    /* width: 49.067vw; */
+    height: 21.429vh;
+    /* top: 8.621vh; */
+    /* left: 8vw; */
+}
 
 .q_text{
     font-weight: 500;
@@ -87,20 +97,22 @@ body{
 }
 
 .t1{
-    position: absolute;
-    left: 36px;
-    top: 288px;
+    /* position: absolute; */
+    /* left: 9.37vw; */
+    /* top: 70vw; */
 
-    font-size: 15px !important;
+    margin-top: 2.7vw;
+    margin-bottom: 1vw;
+    font-size: 3.62vw !important;
     line-height: 170%;
 }
 
 .t2{
     position: absolute;
-    left: 36px;
-    top: 346px; 
+    /* left: 9.37vw; */
+    /* top: 83vw;  */
 
-    font-size: 11px !important;
+    font-size: 2.8vw !important;
     line-height: 170%;
 }
 
@@ -108,16 +120,16 @@ body{
     position: absolute;
     width:80vw;
     margin:0 auto;
-    bottom : 30px;
-    font-size: 10px !important;
+    bottom : 7.9vw;
+    font-size: 2.6vw !important;
     text-align: center;
 }
 
 .updown { 
     position: absolute;
-    left: 36px;
-    top: 382px;
-    border: 1px solid var(--bg-color); 
+    left: 9.37vw;
+    top: 89vw;
+    border-left: 2px solid var(--bg-color); 
     height: 30%; 
 }
 
@@ -126,15 +138,16 @@ body{
 }
 
 .start_btn{
-    width: 40vw;
     position:absolute;
+    width: 40vw;
+    left: 5vw;
     bottom:15.691vh;
     transition: all 0.3s ease 0s;
 }
 
+
 .next_btn, .home_btn{
-    width: 28.646vw;
-    
+    width: 28.646vw;    
     position: absolute;
     top:550px;
     right:16px;
