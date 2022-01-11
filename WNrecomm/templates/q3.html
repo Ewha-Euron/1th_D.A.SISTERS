@@ -28,11 +28,11 @@
 
 {% block content %}
 <form action="">
-    <input type="text" placeholder="찾아보기">
+    <input class="search" type="text" placeholder="제목을 입력해주세요.">
     <input type="image" src="{% static 'img/search.svg' %}" class="search_btn">
 </form>
 
-<a type='button' href="{% url 'q3' %}">
+<a type='button' href="{% url 'result' %}">
     <img class="next_btn btn" src="{% static 'img/next_btn.svg' %}">
 </a>
 {% endblock %}
