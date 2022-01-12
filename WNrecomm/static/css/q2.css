@@ -18,10 +18,12 @@
 }
 
 form>div{
-    margin:20px;
-    font-size: 24px;
+    margin:1.17vh;
+    font-size: 4.22vh;
     font-weight: bold;
+    color: #A6A6A6;
 }
+
 form>div>input{
     display:none;
 }

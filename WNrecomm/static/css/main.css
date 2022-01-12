@@ -14,18 +14,18 @@ body{
     position:fixed;
     width:100vw;
     height:100vh;
+    background: var(--main-color);
 }
 
-#home{ 
-    background: linear-gradient(rgba(60, 39, 94, 0.56), rgba(60, 39, 94, 0.56)),
-    url('../img/main_bg.svg');
+.mainbg{
+    background: linear-gradient(rgba(60, 39, 94, 0.56), rgba(60, 39, 94, 0.56)), url(../img/main_bg.jpg);
+    background-attachment: fixed;
     background-size: cover;
 }
 
 .container{
     width:100%;
     height:100%;
-    background: var(--main-color);
     position:relative;
     padding: 10vw;
 }
@@ -36,29 +36,24 @@ body{
     width: 100%;
     height: auto;
     color: var(--bg-color);
-
+    font-weight: 500;
 }
 
 .logo{
-    /* position: absolute; */
     left: 0;
-    /* width: 49.067vw; */
     height: 21.429vh;
-    /* top: 8.621vh; */
-    /* left: 8vw; */
 }
 
 .q_text{
     font-weight: 500;
-    font-size: 20px;
+    font-size: 2.3vh;
     color: var(--bg-color);
 }
-
 
 .progress{
     margin: 4vh 0 2.5vh 0;
     width: 80vw;
-    height: 50px;
+    height: 5.85vh;
     background-color: transparent;
     display:block;
 }
@@ -97,50 +92,47 @@ body{
 }
 
 .t1{
-    /* position: absolute; */
-    /* left: 9.37vw; */
-    /* top: 70vw; */
-
     margin-top: 2.7vw;
     margin-bottom: 1vw;
-    font-size: 3.62vw !important;
+    font-size: 1.76vh !important;
     line-height: 170%;
 }
 
 .t2{
     position: absolute;
-    /* left: 9.37vw; */
-    /* top: 83vw;  */
-
-    font-size: 2.8vw !important;
+    font-size: 1.29vh !important;
     line-height: 170%;
 }
 
 .t3{
     position: absolute;
     width:80vw;
-    margin:0 auto;
+    margin: 0 auto;
     bottom : 7.9vw;
-    font-size: 2.6vw !important;
+    font-size: 1.17vh !important;
     text-align: center;
+    color: var(--bg-color);
 }
 
 .updown { 
     position: absolute;
-    left: 9.37vw;
-    top: 89vw;
+    left: 9.5vw;
+    top: 44.85vh;
     border-left: 2px solid var(--bg-color); 
     height: 30%; 
 }
 
 .back_btn{
+    margin: 0;
     width:6.250vw;
+    /* height: 3.51vh; */
 }
 
 .start_btn{
     position:absolute;
-    width: 40vw;
-    left: 5vw;
+    /* width: 40vw; */
+    height: 7.26vh;
+    left: 6.5vw;
     bottom:15.691vh;
     transition: all 0.3s ease 0s;
 }
@@ -150,10 +142,12 @@ body{
 }
 
 .next_btn, .home_btn{
-    width: 28.646vw;    
+    /* width: 28.646vw; */
+    height: 7vh;    
     position: absolute;
-    top:550px;
-    right:16px;
+    /* top:550px; */
+    bottom: 33.2vh;
+    right:4.43vw;
     transition: all 0.3s ease 0s;
 }
 
@@ -162,13 +156,13 @@ body{
 }
 
 .main{
+    position:absolute;
     background: var(--bg-color);
-    border-radius: 33px;
+    border-radius: 8.59vw;
     width:100%;
     height:100%;
-    position:absolute;
     left: 0px;
     top: 30vh;
-    padding: 30px;
+    padding: 7.81vw;
 }
 
