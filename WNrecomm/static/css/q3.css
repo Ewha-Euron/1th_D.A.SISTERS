@@ -10,18 +10,54 @@
     background: var(--accent-color);
     color:var(--accent-color);
 }
+.s_wrap{
+    text-align: center;
+    margin-bottom: 10px;
+}
 
 .search_btn{
     position:absolute;
+    margin-left: -30px;
+    margin-top: 10px;
 }
 
 .search{
     border: none;
     border-bottom :1px solid black;
     color:black;
-    width:274px;
+    width:100%;
     padding:10px;
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
+}
+
+table{
+    border-collapse: separate;
+    border-spacing:0 20px;
+}
+
+.thumbnail{
+    padding:20px;
+}
+
+.title{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    color:black;
+}
+
+.author, .genre{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    color:#A6A6A6;
+}
+
+.read_btn{
+    position:fixed;
+    bottom: 20px;
+    left:20px;
+    filter: drop-shadow(0px 5px 2px var(--sub-color));
 }
