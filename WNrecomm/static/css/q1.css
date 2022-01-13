@@ -32,8 +32,8 @@ input[type=radio]:hover + label>img {
 }
 
 input[type=radio] + label>img{
-    width:31.250vw;
-    height:31.250vw;
+    width:120.89px;
+    height:122.73px;
 }
 
 input[type=radio]:checked + label>img{

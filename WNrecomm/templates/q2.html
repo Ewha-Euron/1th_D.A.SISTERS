@@ -26,9 +26,8 @@
 {% endblock %}
 
 {% block content %}
-<p style="color:#796BD3;">*우선 순위대로 선택해주세요</p>
 
-<form action="{% url 'q3' %}" method="get">
+<form action="{% url 'q3' %}" method="get" style = 'margin-top: 30px;'>
     <div>
         <input onclick="CountChecked(this)" type="checkbox" name="impt" id="1" value="1">
         <label for="1">좋아요 수</label>
