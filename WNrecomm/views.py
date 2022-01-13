@@ -21,7 +21,14 @@ def q3(request):
     if request.method == 'GET':
         selected = request.GET.get('chb')
         print(selected) # 순서대로 리스트 형태로
+
+        search = request.GET.get('search') # 검색어
+        print(search)
         return render(request, 'q3.html')
+
+def novel_list(request):
+    return render(request, 'novel_list.html')
+
 
 def result(request):
     return render(request, 'result.html')

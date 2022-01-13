@@ -27,62 +27,63 @@
 
 <!-- 질문 하얀색 부분 -->
 {% block content %}
-<form action="{% url 'q2' %}" method="get">
-    <p>성인 작품 추천받기</p>
-    <table class="mx-auto">
-        <tr>
-            <td height = "0">
-                <input type="radio" name="adultchild" id="adult_yes" class="select_btn" value="adult_yes" onclick="checkRadio()"/>
-                <label for="adult_yes">
-                    <img class="adult_yes" src = "{% static 'img/adult_yes.svg' %}" height = "100%">
-                </label>
-            </td>
-            <td height = "0">
-                <input type="radio" name="adultchild" id="adult_no" class="select_btn" value="adult_no" onclick="checkRadio()"/>
-                <label for="adult_no">
-                    <img class="adult_no"src = "{% static 'img/adult_no.svg' %}" height = "100%">
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span>YES</span>
-            </td>
-            <td>
-                <span>NO</span>
-            </td>
-        </tr>
-    </table>
-    
-    <p>완결 작품만 추천받기</p>
-    <table class="mx-auto">
-        <tr>
-            <td height = "0">
-                <input type="radio" name="finished" id="finish_yes" class="select_btn" value="finish_yes" onclick="checkRadio()"/>
-                <label for="finish_yes">
-                    <img class="finish_yes" src = "{% static 'img/finish_yes.svg' %}" height = "100%">
-                </label>
-            </td>
-            <td height = "0">
-                <input type="radio" name="finished" id="finish_no" class="select_btn" value="finish_no" onclick="checkRadio()"/>
-                <label for="finish_no">
-                    <img class="finish_no" src = "{% static 'img/finish_no.svg' %}" height = "100%">
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span>YES</span>
-            </td>
-            <td>
-                <span>NO</span>
-            </td>
-        </tr>
-    </table>
-    
-    <input type='image' class="next_btn btn" src="{% static 'img/next_btn.svg' %}" disabled>
-</form>
-
+<div class="main mx-auto">
+    <form action="{% url 'q2' %}" method="get">
+        <p>성인 작품 추천받기</p>
+        <table class="mx-auto">
+            <tr>
+                <td height = "0">
+                    <input type="radio" name="adultchild" id="adult_yes" class="select_btn" value="adult_yes" onclick="checkRadio()"/>
+                    <label for="adult_yes">
+                        <img class="adult_yes" src = "{% static 'img/adult_yes.svg' %}" height = "100%">
+                    </label>
+                </td>
+                <td height = "0">
+                    <input type="radio" name="adultchild" id="adult_no" class="select_btn" value="adult_no" onclick="checkRadio()"/>
+                    <label for="adult_no">
+                        <img class="adult_no"src = "{% static 'img/adult_no.svg' %}" height = "100%">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>YES</span>
+                </td>
+                <td>
+                    <span>NO</span>
+                </td>
+            </tr>
+        </table>
+        
+        <p>완결 작품만 추천받기</p>
+        <table class="mx-auto">
+            <tr>
+                <td height = "0">
+                    <input type="radio" name="finished" id="finish_yes" class="select_btn" value="finish_yes" onclick="checkRadio()"/>
+                    <label for="finish_yes">
+                        <img class="finish_yes" src = "{% static 'img/finish_yes.svg' %}" height = "100%">
+                    </label>
+                </td>
+                <td height = "0">
+                    <input type="radio" name="finished" id="finish_no" class="select_btn" value="finish_no" onclick="checkRadio()"/>
+                    <label for="finish_no">
+                        <img class="finish_no" src = "{% static 'img/finish_no.svg' %}" height = "100%">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>YES</span>
+                </td>
+                <td>
+                    <span>NO</span>
+                </td>
+            </tr>
+        </table>
+        
+        <input type='image' class="next_btn btn" src="{% static 'img/next_btn.svg' %}" disabled>
+    </form>
+</div>
 {% endblock %} 
 
 {% block script %}

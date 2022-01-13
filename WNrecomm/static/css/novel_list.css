@@ -1,0 +1,32 @@
+:root {
+    --main-color: #796BD3;
+    --dark-main-color: #6152C2;
+    --accent-color: #FFE588;
+    --sub-color: #D1D1D1;
+    --bg-color: #FFFFFF;
+}
+
+.main{
+    top: 15vh !important;
+}
+
+.e_list{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    color: var(--main-color);
+}
+
+.e_line{
+    border: 1px solid var(--main-color);
+}
+
+.delete_btn{
+    border:none;
+    float:right;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    color: #A6A6A6;
+    background: none;
+}
