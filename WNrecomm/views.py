@@ -26,6 +26,10 @@ def q3(request):
         print(search)
         return render(request, 'q3.html')
 
+
+def loading(request):
+    return render(request, 'loading.html')
+
 def novel_list(request):
     return render(request, 'novel_list.html')
 

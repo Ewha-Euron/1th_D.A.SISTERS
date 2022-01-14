@@ -64,4 +64,35 @@
         <img class="next_btn btn" src="{% static 'img/next_btn.svg' %}">
     </a>
 </div>
+
+
+<table>
+    <tr>
+        <td class="thumbnail"><img src="{% static 'img/adult_yes.svg' %}" alt=""></td>
+        <td>
+            <p class="title">제목</p>
+            <div class="author">작가</div>
+            <p class="genre">장르</p>
+            <p>평점</p>
+        </td>
+    </tr>
+    <tr>
+        <td class="thumbnail"><img src="{% static 'img/adult_yes.svg' %}" alt=""></td>
+        <td>
+            <p class="title">제목</p>
+            <div class="author">작가</div>
+            <p class="genre">장르</p>
+            <p>평점</p>
+        </td>
+    </tr>
+</table>
+
+<a type='button' href="{% url 'result' %}">
+    <img class="read_btn btn" src="{% static 'img/closed.svg' %}">
+</a>
+
+<a type='button' href="{% url 'result' %}">
+    <img class="next_btn btn" src="{% static 'img/result_btn.svg' %}">
+</a>
+
 {% endblock %}
