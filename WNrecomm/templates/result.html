@@ -12,13 +12,15 @@
 {% endblock %}
 
 {% block content %}
-<section id="main" class='mx-auto my-5 py-5 px-5'>
-    <p>
-        결과들 쭈르르르르
-    </p>
-</section>
-
-<a type='button' href="{% url 'main' %}">
-    <img class="home_btn btn" src="{% static 'img/home_btn.svg' %}">
-</a>
+<div class="main mx-auto">
+    <section id="main" class='mx-auto my-5 py-5 px-5'>
+        <p>
+            결과들 쭈르르르르
+        </p>
+    </section>
+    
+    <a type='button' href="{% url 'main' %}">
+        <img class="home_btn btn" src="{% static 'img/home_btn.svg' %}">
+    </a>
+</div>
 {% endblock %}
