@@ -6,7 +6,11 @@
     --bg-color: #FFFFFF;
 }
 
-.c1, .l1, .c2, .l2, .c3{
+.c1, .c2{
+    background-image: url(../img/check.svg);
+}
+
+.l1, .l2, .c3{
     background: var(--accent-color);
     color:var(--accent-color);
 }

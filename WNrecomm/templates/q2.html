@@ -26,38 +26,34 @@
 {% endblock %}
 
 {% block content %}
-<div class="main mx-auto">
-    <p style="color:#796BD3;">*우선 순위대로 선택해주세요</p>
-
-    <form action="{% url 'q3' %}" method="get">
-        <div>
-            <input onclick="CountChecked(this)" type="checkbox" name="impt" id="1" value="1">
-            <label for="1">좋아요 수</label>
-        </div>
-        <div>
-            <input onclick="CountChecked(this)" type="checkbox" name="impt" id="2" value="2">
-            <label for="2">평균 별점</label>        
-        </div>
-        <div>
-            <input onclick="CountChecked(this)" type="checkbox" name="impt" id="3" value="3">
-            <label for="3">전체 리뷰 수</label>        
-        </div>
-        <div>
-            <input onclick="CountChecked(this)" type="checkbox" name="impt" id="4" value="4">
-            <label for="4">구매자 수</label>
-        </div>
-        <div>
-            <input onclick="CountChecked(this)" type="checkbox" name="impt" id="5" value="5">
-            <label for="5">무료회차/기다무</label>
-        </div>
-        <div>
-            <input onclick="CountChecked(this)" type="checkbox" name="impt" id="6" value="6">
-            <label for="6">키워드 및 소개</label>
-        </div>
-        <input type="hidden" id="chb" name="chb" value="">
-        <input type='image' class="next_btn btn" src="{% static 'img/next_btn.svg' %}" disabled>
-    </form>
-</div>
+<form action="{% url 'q3' %}" method="get" style = 'margin-top: 30px;'>
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="1" value="1">
+        <label for="1">좋아요 수</label>
+    </div>
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="2" value="2">
+        <label for="2">평균 별점</label>        
+    </div>
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="3" value="3">
+        <label for="3">전체 리뷰 수</label>        
+    </div>
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="4" value="4">
+        <label for="4">구매자 수</label>
+    </div>
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="5" value="5">
+        <label for="5">무료회차/기다무</label>
+    </div>
+    <div>
+        <input onclick="CountChecked(this)" type="checkbox" name="impt" id="6" value="6">
+        <label for="6">키워드 및 소개</label>
+    </div>
+    <input type="hidden" id="chb" name="chb" value="">
+    <input type='image' class="next_btn btn" src="{% static 'img/next_btn.svg' %}" disabled>
+</form>
 {% endblock %}
 
 {% block script %}

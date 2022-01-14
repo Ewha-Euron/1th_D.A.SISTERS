@@ -21,7 +21,7 @@
         {% endblock %}
     </head>
     <body>
-        <div class="container"> 
+        <div class="container" id = 'con_q'> 
             <a href="javascript:history.back()"><img class="back_btn" src="{% static 'img/arrow-left.svg' %}"></a>
             {% block question %}
             <div class="progress">
@@ -41,14 +41,13 @@
 
             <p class="q_text">텍스트</p>
             {% endblock %}
-        </div>
-        {% block content %}
+          
         <div class="main mx-auto">
             <a type='button' href="{% url 'q2' %}">
                 <img class="next_btn btn" src="{% static 'img/next_btn.svg' %}">
             </a>
         </div>
-        {% endblock %}
+        </div>
     </body>
     {% block script %}
     {% endblock %}
