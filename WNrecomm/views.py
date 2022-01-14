@@ -23,6 +23,9 @@ def q3(request):
         print(selected) # 순서대로 리스트 형태로
         return render(request, 'q3.html')
 
+def loading(request):
+    return render(request, 'loading.html')
+
 def result(request):
     return render(request, 'result.html')
 '''
