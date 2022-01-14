@@ -1,0 +1,63 @@
+{% extends 'q_base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/novel_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/q3.css' %}">
+{% endblock %}
+
+{% block question %}
+{% endblock %}
+
+
+{% block content %}
+<div class="main mx-auto">
+    <p class="e_list">평가한 작품 목록</p>
+    <hr class="e_line">
+    <table>
+        <colgroup>
+            <col style="width:30%">
+            <col style="width:50%">
+            <col style="width:20%">
+        </colgroup>
+        <tr>
+            <td class="thumbnail"><img src="{% static 'img/adult_yes.svg' %}" alt=""></td>
+            <td>
+                <p class="title">제목</p>
+                <div class="author">작가</div>
+                <p class="genre">장르</p>
+                <p>평점</p>
+            </td>
+            <td valign="top">
+                <button type="button" class="delete_btn">삭제</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="thumbnail"><img src="{% static 'img/adult_yes.svg' %}" alt=""></td>
+            <td>
+                <p class="title">제목</p>
+                <div class="author">작가</div>
+                <p class="genre">장르</p>
+                <p>평점</p>
+            </td>
+            <td valign="top">
+                <button type="button" class="delete_btn">삭제</button>
+            </td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    var delete_btn = document.getElementsByClassName('delete_btn');
+    
+    for (var i=0; i<delete_btn.length; i++) {
+        delete_btn[i].addEventListener('click', function() {
+            var parent = document.querySelector('.main table tbody');
+            parent.removeChild(this.parentElement.parentElement);
+            i --;
+        })
+    }
+</script>
+{% endblock %}
