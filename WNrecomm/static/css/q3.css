@@ -65,3 +65,42 @@ table{
     left:20px;
     filter: drop-shadow(0px 5px 2px var(--sub-color));
 }
+
+.star-rating {
+    font-size: 20px;
+    width:100%;
+    height:25px;
+
+}
+
+.star-rating input {
+    display:none;
+}
+  
+.star-rating label {
+    color:#ccc;
+    cursor:pointer;
+    float:left;
+    margin:3px 3px 0 0;
+}
+  
+.star-rating :checked ~ label {
+    color:var(--main-color);
+}
+  
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color:#aba3d8;
+}
+
+.add_btn{
+    border:1px solid var(--main-color);
+    border-radius: 5px;
+    float:right;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--main-color);
+    background: none;
+    margin:12px;
+}
