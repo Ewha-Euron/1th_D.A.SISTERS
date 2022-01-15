@@ -10,21 +10,20 @@ from sklearn.preprocessing import MinMaxScaler
 from PIL import Image
 from io import BytesIO
 import matplotlib.pyplot as plt
-import requests
+#import requests
 import urllib.request
 import json
 from collections import OrderedDict
 
-novel = pd.read_csv('novel.csv',encoding='cp949').drop('Unnamed: 0',axis=1)
-review = pd.read_csv('review.csv')
-text =  pd.read_csv('text.csv').drop('Unnamed: 0',axis=1)
-cos =  pd.read_csv('cosine_sim.csv').drop('Unnamed: 0',axis=1)
+novel = pd.read_csv('WNrecomm/static/novel.csv',encoding='cp949').drop('Unnamed: 0',axis=1)
+review = pd.read_csv('WNrecomm/static/review.csv')
+text =  pd.read_csv('WNrecomm/static/text.csv').drop('Unnamed: 0',axis=1)
+cos =  pd.read_csv('WNrecomm/static/cosine_sim.csv').drop('Unnamed: 0',axis=1)
 
 
 
 def main(request):
     return render(request, 'main.html')
-
 
 def q_base(request):
     return render(request, 'q_base.html')
@@ -47,39 +46,45 @@ cf = 0
 cb = 0 
 
 
-dict_user = {'like' : 0 , 'avgrating' : 0 , 'totalreview':0, 'purchase':0, 'waiting':0, 'keywords':0}
+#dict_user = {'like' : 0 , 'avgrating' : 0 , 'totalreview':0, 'purchase':0, 'waiting':0, 'keywords':0}
+dict_user=[0, 0, 0, 0, 0, 0]
 
 def q3(request):
     if request.method == 'GET':
-        selected = request.GET.get('chb')
-        for i in selected :  
-            dict_user[i-1] = 1 
+        if request.GET.get('chb'):
+            selected = request.GET.get('chb')
+            for i in range(0, len(selected)+1, 2) :
+                dict_user[int(selected[i])-1] = 1 
+            #print(dict_user)
+            return render(request, 'q3.html')
 
-        search = request.GET.get('search') # 검색어. json 형태로 보내기 
-        idx_list = []
-        for i in range(len(novel)) : 
-            if str(search) in novel['제목'][i] : 
-                idx_list.append(i)
-        
-        
+        elif request.GET.get('search'):
+            search = request.GET.get('search') # 검색어. json 형태로 보내기 
+            idx_list = []
+            for i in range(len(novel)) : 
+                if str(search) in novel['제목'][i] : 
+                    idx_list.append(i)
 
-        idx_dict = {
-            'image' : novel.loc[idx_list,'썸네일'].tolist()  , 
-            'title' : novel.loc[idx_list,'제목'].tolist()  ,
-            'author': novel.loc[idx_list,'작가'].tolist()  ,
-            'genre' : novel.loc[idx_list,'장르'].tolist()
-        }
+            search_result = []
+            for i in idx_list:
+                idx_dict = {
+                    'image' : novel.loc[i,'썸네일'], 
+                    'title' : novel.loc[i,'제목'],
+                    'author': novel.loc[i,'작가'],
+                    'genre' : novel.loc[i,'장르']
+                }
+                search_result.append(idx_dict)
 
-        targetJson = json.dumps(idx_dict)
-
-
-        return render(request, 'q3.html',{'targetjson' : targetJson})
+            #print(search_result)
+            #targetJson = json.dumps(idx_dict)
+            return render(request, 'q3.html',{'search_result' : search_result})
         
 
 # 프론트 : 별점 평가, 장바구니 담기기 -- novellist (가상 유저 데이터 프레임 생성)
 
 
 
+'''
 
 
 # (1차완) 추천 코드 복붙 & 수정 -- 추천 결과 리스트 json 반환되게 하기 -- 프론트에 넘기는 
@@ -280,7 +285,7 @@ recomm_Json = json.dumps(recmm_dict)
 
 
 #####################################################
-
+'''
 def loading(request):
     return render(request, 'loading.html')
 

@@ -38,15 +38,15 @@
     <table>
         <colgroup>
             <col style="width:30%">
-            <col style="width:50%">
-            <col style="width:20%">
+            <col style="width:70%">
         </colgroup>
+        {% for novel in search_result %}
         <tr>
-            <td class="thumbnail"><img src="{% static 'img/adult_yes.svg' %}" alt=""></td>
+            <td class="thumbnail"><img src="{{novel.image}}" alt="" width="85" height="122"></td>
             <td>
-                <p class="title">제목</p>
-                <div class="author">작가</div>
-                <div class="genre">장르</div>
+                <p class="title">{{novel.title}}</p>
+                <div class="author">{{novel.author}}</div>
+                <div class="genre">{{novel.genre}}</div>
                 <div class="star-rating">
                     <input type="radio" id="5-stars" name="rating" value="5" />
                     <label for="5-stars" class="star">&#9733;</label>
@@ -59,34 +59,10 @@
                     <input type="radio" id="1-star" name="rating" value="1" />
                     <label for="1-star" class="star">&#9733;</label>
                 </div>
-            </td>
-            <td valign="bottom">
-                <button type="button" class="add_btn">선택</button>
-            </td>
+                <button type="button" class="add_btn" onclick="select_novel()">선택</button>
+            </td>          
         </tr>
-        <tr>
-            <td class="thumbnail"><img src="{% static 'img/adult_yes.svg' %}" alt=""></td>
-            <td>
-                <p class="title">제목</p>
-                <div class="author">작가</div>
-                <div class="genre">장르</div>
-                <div class="star-rating">
-                    <input type="radio" id="5-stars" name="rating" value="5" onclick="rating(this)"/>
-                    <label for="5-stars" class="star">&#9733;</label>
-                    <input type="radio" id="4-stars" name="rating" value="4" onclick="rating(this)"/>
-                    <label for="4-stars" class="star">&#9733;</label>
-                    <input type="radio" id="3-stars" name="rating" value="3" onclick="rating(this)"/>
-                    <label for="3-stars" class="star">&#9733;</label>
-                    <input type="radio" id="2-stars" name="rating" value="2" onclick="rating(this)"/>
-                    <label for="2-stars" class="star">&#9733;</label>
-                    <input type="radio" id="1-star" name="rating" value="1" onclick="rating(this)"/>
-                    <label for="1-star" class="star">&#9733;</label>
-                </div>
-            </td>
-            <td valign="bottom">
-                <button type="button" class="add_btn">선택</button>
-            </td>
-        </tr>
+        {% endfor %}
     </table>
     
     <a type='button' href="{% url 'novel_list' %}">
@@ -100,8 +76,8 @@
 {% endblock %}
 {% block script %}
 <script>
-    function rating(field){
-        console.log(field.value);
+    function select_novel(){
+        
     }
 </script>
 {% endblock %}
