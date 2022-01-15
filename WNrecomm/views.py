@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 import pandas as pd
 import numpy as np
@@ -43,10 +43,9 @@ def q2(request):
     return render(request, 'q2.html')
 
 cf = 0 
-cb = 0 
 
 
-#dict_user = {'like' : 0 , 'avgrating' : 0 , 'totalreview':0, 'purchase':0, 'waiting':0, 'keywords':0}
+
 dict_user=[0, 0, 0, 0, 0, 0]
 
 def q3(request):
@@ -68,6 +67,7 @@ def q3(request):
             search_result = []
             for i in idx_list:
                 idx_dict = {
+                    'index' : i,
                     'image' : novel.loc[i,'썸네일'], 
                     'title' : novel.loc[i,'제목'],
                     'author': novel.loc[i,'작가'],
@@ -78,17 +78,86 @@ def q3(request):
             #print(search_result)
             #targetJson = json.dumps(idx_dict)
             return render(request, 'q3.html',{'search_result' : search_result})
-        
 
-# 프론트 : 별점 평가, 장바구니 담기기 -- novellist (가상 유저 데이터 프레임 생성)
+    return render(request, 'q3.html')
+
+cart_result = [] # 계속해서 장바구니에 쌓일 예정
+def add_novel_list(request):
+    if request.method == 'GET':
+        rating = int(request.GET.get('rating'))
+        n_i = int(request.GET.get('novel_index'))
+
+        idx_dict = {
+            'index' : n_i,
+            'image' : novel.loc[n_i,'썸네일'], 
+            'title' : novel.loc[n_i,'제목'],
+            'author': novel.loc[n_i,'작가'],
+            'genre' : novel.loc[n_i,'장르'],
+            'rating' : rating
+        }
+        cart_result.append(idx_dict)
+
+    return redirect('q3')
 
 
+def novel_list(request):
+    return render(request, 'novel_list.html', {'cart_result' : cart_result})
 
+
+def novel_delete(request):
+    if request.method == 'GET':
+        n_i_d = int(request.GET.get('novel_index_delete')) # 인덱스 하나 날아옴
+        for i in range(len(cart_result)):
+            if cart_result[i]['index'] == n_i_d :
+                del cart_result[i]
+                break
+                
+    return render(request, 'novel_list.html', {'cart_result' : cart_result})
+
+
+def loading(request):
+    return render(request, 'loading.html')
+
+
+def result(request):
+    return render(request, 'result.html')
+    
 '''
+# (2차수정)
 
+# 장바구니 플로우 정리
+#(상황1)
+# 1. 평점을 등록하고나서 선택 버튼을 누른다. -> 인덱스, 평점이 어떤 리스트 안에 담김.
+# 2. 이 리스트를 장바구니 페이지에 우리가 만든 데이터프레임 변수에 넣는다. (novel_list)
 
-# (1차완) 추천 코드 복붙 & 수정 -- 추천 결과 리스트 json 반환되게 하기 -- 프론트에 넘기는 
+#(상황1-2)
+# 1. 장바구니를 클릭해서 확인 -> 지금까지 매긴 작품 이름, 평점 누적되어 출력되어야 함.
+
+#(상황2_삭제)
+# 1. 장바구니를 클릭해서 확인 -> 지금까지 매긴 작품 이름, 평점 누적되어 출력되어야 함.
+# 2. 작품 이름, 평점 옆에 있는 (삭제) 버튼을 누른다. -> 삭제되는 작품의 인덱스를 받아서 해당 데이터를 데이터프레임에서 삭제함. (novel_delete)
+
+### 이후에, '다음' 버튼을 누르면 -> 최종 데이터프레임이 유저 변수가 되어서 추천으로 넘어감.
+
 ################################################
+
+# 유저 데이터프레임 생성
+user = pd.DataFrame({'ID' : ['user']*len(cart_result) , 'novelindex' : [0]*len(cart_result) , '평점' : [0]*len(cart_result) })
+
+for i in range(len(cart_result)) : 
+     user['novelindex'][i] = cart_result[i]['index']
+     user['평점'][i] = cart_result[i]['rating']
+
+
+like = dict_user[0]
+avgrating = dict_user[1]
+totalreview = dict_user[2]
+purchase = dict_user[3]
+waiting = dict_user[4]
+keywords = dict_user[5]
+
+
+
 ## 1. 성인, 완결 필터링 ##
 a = [] # 리뷰에서도 작품을 제외하기 위한 list -> 이 안의 작품들은 리뷰에서 지워짐
 f = []
@@ -220,7 +289,7 @@ review_user = pd.concat([user, review_new], axis = 0)
 ratings = review_user.pivot_table('평점', index = 'ID', columns = 'novelindex')
 ratings = ratings.fillna(0) # 없는 평점은 0으로
 
-# item dim_df -> 영화간 유사도 계산
+# item dim_df -> 유사도 계산
 ratings_T = ratings.transpose()
 item_sim = cosine_similarity(ratings_T, ratings_T)
 item_sim_df = pd.DataFrame(data = item_sim, index = ratings.columns, columns = ratings.columns)
@@ -267,33 +336,24 @@ ID = 'user'
 unseen_lst = unseen_item(ratings, ID)
 recomm_novel = cf_item_recomm(predict, ID, unseen_lst, top_n = 2 + cf)
 
-# list와 dataframe중 어떻게 넘길지?
 # 상위 추천 작품 list (인덱스형태)
 cf_recmm = recomm_novel.index.tolist()
 
 ##4. 추천 결과 합치기##
 recmm_idx = cb_recmm + cf_recmm
 
-recmm_dict = {
-            'image' : novel.loc[recmm_idx,'썸네일'].tolist()  , 
-            'title' : novel.loc[recmm_idx,'제목'].tolist()  ,
-            'author': novel.loc[recmm_idx,'작가'].tolist()  ,
-            'genre' : novel.loc[recmm_idx,'장르'].tolist()
-        }
-
-recomm_Json = json.dumps(recmm_dict)
+recmm_result = [] # 프론트에서 접근 가능한 형태로 변환
+    for i in recmm_idx:
+        idx_dict = {
+                    'index' : i,
+                    'image' : novel.loc[i,'썸네일'], 
+                    'title' : novel.loc[i,'제목'],
+                    'author': novel.loc[i,'작가'],
+                    'genre' : novel.loc[i,'장르'],
+                    'url' : novel.loc[i, '링크']
+                }
+        recmm_result.append(idx_dict)
 
 
 #####################################################
 '''
-def loading(request):
-    return render(request, 'loading.html')
-
-def novel_list(request):
-    return render(request, 'novel_list.html')
-
-
-def result(request):
-    return render(request, 'result.html')
-
-

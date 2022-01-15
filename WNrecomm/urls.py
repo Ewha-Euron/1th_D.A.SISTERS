@@ -13,7 +13,10 @@ urlpatterns = [
 
     path('loading/', views.loading, name='loading'),
 
-    path('q3/novel_list', views.novel_list, name='novel_list'),
+
+    path('q3/novel_list/', views.novel_list, name='novel_list'),
+    path('q3/add_novel_list/', views.add_novel_list, name='add_novel_list'),
+    path('q3/novel_list/novel_delete/', views.novel_delete, name='novel_delete'),
 
     path('result/', views.result, name='result'),
 ]

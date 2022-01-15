@@ -14,50 +14,67 @@
 <div class="main mx-auto">
     <p class="e_list">평가한 작품 목록</p>
     <hr class="e_line">
+
     <table>
         <colgroup>
             <col style="width:30%">
-            <col style="width:50%">
-            <col style="width:20%">
+            <col style="width:70%">
         </colgroup>
+        {% for novel in cart_result %}
         <tr>
-            <td class="thumbnail"><img src="{% static 'img/adult_yes.svg' %}" alt=""></td>
-            <td>
-                <p class="title">제목</p>
-                <div class="author">작가</div>
-                <p class="genre">장르</p>
-                <p>평점</p>
-            </td>
-            <td valign="top">
-                <button type="button" class="delete_btn">삭제</button>
-            </td>
+            <form id = 'delete_form' action="{% url 'novel_delete' %}" method="get">
+                <td class="thumbnail"><img src="{{novel.image}}" alt="" width="85" height="122"></td>
+                <td>
+                    <p class="title">{{novel.title}}</p>
+                    <div class="author">{{novel.author}}</div>
+                    <div class="genre">{{novel.genre}}</div>
+                    <div class="rating" style="display:none">{{novel.rating}}</div>
+                    <div class="star-rating">
+                        <input type="radio" id="5-stars" name="rating" value="5" onclick="return(false);"/>
+                        <label for="5-stars" class="star">&#9733;</label>
+                        <input type="radio" id="4-stars" name="rating" value="4" onclick="return(false);"/>
+                        <label for="4-stars" class="star">&#9733;</label>
+                        <input type="radio" id="3-stars" name="rating" value="3" onclick="return(false);"/>
+                        <label for="3-stars" class="star">&#9733;</label>
+                        <input type="radio" id="2-stars" name="rating" value="2" onclick="return(false);"/>
+                        <label for="2-stars" class="star">&#9733;</label>
+                        <input type="radio" id="1-star" name="rating" value="1" onclick="return(false);"/>
+                        <label for="1-star" class="star">&#9733;</label>
+                    </div>
+                    <input type="hidden" id="nIndex_del" name="novel_index_delete" value="{{novel.index}}">
+                    <button type="submit" class="delete_btn">삭제</button> 
+                </td>         
+            </form>
         </tr>
-        <tr>
-            <td class="thumbnail"><img src="{% static 'img/adult_yes.svg' %}" alt=""></td>
-            <td>
-                <p class="title">제목</p>
-                <div class="author">작가</div>
-                <p class="genre">장르</p>
-                <p>평점</p>
-            </td>
-            <td valign="top">
-                <button type="button" class="delete_btn">삭제</button>
-            </td>
-        </tr>
+        {% endfor %}
     </table>
+    
+    <a type='button' href="{% url 'q3' %}">
+        <img class="read_btn btn" src="{% static 'img/open.svg' %}">
+    </a>
 </div>
 {% endblock %}
 
 {% block script %}
 <script>
     var delete_btn = document.getElementsByClassName('delete_btn');
-    
     for (var i=0; i<delete_btn.length; i++) {
         delete_btn[i].addEventListener('click', function() {
+            document.getElementById('delete_form').submit();
             var parent = document.querySelector('.main table tbody');
             parent.removeChild(this.parentElement.parentElement);
             i --;
         })
     }
+
+    var rating = document.getElementsByClassName('rating');
+    var radio = document.querySelectorAll('input[name="rating"]');
+    for (var i=0; i<rating.length; i++) {
+        for (var j=0; j<radio.length; j++) {
+            if(radio[j].value == rating[i].innerHTML){
+                radio[j].checked = true;
+            }
+        }
+    }    
 </script>
 {% endblock %}

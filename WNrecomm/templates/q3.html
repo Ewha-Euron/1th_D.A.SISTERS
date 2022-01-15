@@ -42,25 +42,28 @@
         </colgroup>
         {% for novel in search_result %}
         <tr>
-            <td class="thumbnail"><img src="{{novel.image}}" alt="" width="85" height="122"></td>
-            <td>
-                <p class="title">{{novel.title}}</p>
-                <div class="author">{{novel.author}}</div>
-                <div class="genre">{{novel.genre}}</div>
-                <div class="star-rating">
-                    <input type="radio" id="5-stars" name="rating" value="5" />
-                    <label for="5-stars" class="star">&#9733;</label>
-                    <input type="radio" id="4-stars" name="rating" value="4" />
-                    <label for="4-stars" class="star">&#9733;</label>
-                    <input type="radio" id="3-stars" name="rating" value="3" />
-                    <label for="3-stars" class="star">&#9733;</label>
-                    <input type="radio" id="2-stars" name="rating" value="2" />
-                    <label for="2-stars" class="star">&#9733;</label>
-                    <input type="radio" id="1-star" name="rating" value="1" />
-                    <label for="1-star" class="star">&#9733;</label>
-                </div>
-                <button type="button" class="add_btn" onclick="select_novel()">선택</button>
-            </td>          
+            <form action="{% url 'add_novel_list' %}" method="get">
+                <td class="thumbnail"><img src="{{novel.image}}" alt="" width="85" height="122"></td>
+                <td>
+                    <p class="title">{{novel.title}}</p>
+                    <div class="author">{{novel.author}}</div>
+                    <div class="genre">{{novel.genre}}</div>
+                    <div class="star-rating star_active">
+                        <input type="radio" id="5-stars" name="rating" value="5" />
+                        <label for="5-stars" class="star">&#9733;</label>
+                        <input type="radio" id="4-stars" name="rating" value="4" />
+                        <label for="4-stars" class="star">&#9733;</label>
+                        <input type="radio" id="3-stars" name="rating" value="3" />
+                        <label for="3-stars" class="star">&#9733;</label>
+                        <input type="radio" id="2-stars" name="rating" value="2" />
+                        <label for="2-stars" class="star">&#9733;</label>
+                        <input type="radio" id="1-star" name="rating" value="1" />
+                        <label for="1-star" class="star">&#9733;</label>
+                    </div>
+                    <input type="hidden" id="nIndex" name="novel_index" value="{{novel.index}}">
+                    <button type="submit" class="add_btn">선택</button>
+                </td>         
+            </form>
         </tr>
         {% endfor %}
     </table>
@@ -77,7 +80,9 @@
 {% block script %}
 <script>
     function select_novel(){
-        
+        // 체크 안했을 때 오류남 -> 발전가능성*^^*
+        var star = document.querySelector('input[name="rating"]:checked').value;
+        console.log(star);
     }
 </script>
 {% endblock %}
