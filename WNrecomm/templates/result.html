@@ -3,6 +3,7 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/result.css' %}">
+<link rel="stylesheet" href="{% static 'css/q3.css' %}">
 {% endblock %}
 
 {% block question %}
@@ -13,10 +14,24 @@
 
 {% block content %}
 <div class="main mx-auto">
-    <section id="main" class='mx-auto my-5 py-5 px-5'>
-        <p>
-            결과들 쭈르르르르
-        </p>
+    <p class="ridi">*작품을 누르면 리디북스 페이지로 이동해요.</p>
+    <section id="result" class='mx-auto'>
+        <table>
+            <colgroup>
+                <col style="width:30%">
+                <col style="width:70%">
+            </colgroup>
+            {% for novel in recmm_result %}
+            <tr style="cursor:pointer;" onClick="window.open('{{novel.url}}', ',')">
+                <td class="thumbnail"><img src="{{novel.image}}" alt="" width="85" height="122"></td>
+                <td>
+                    <p class="title">{{novel.title}}</p>
+                    <div class="author">{{novel.author}}</div>
+                    <div class="genre">{{novel.genre}}</div>
+                </td>         
+            </tr>
+            {% endfor %}
+        </table>
     </section>
     
     <a type='button' href="{% url 'main' %}">

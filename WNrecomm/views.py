@@ -35,6 +35,7 @@ adult = 0
 finish = 0 
 
 def q2(request):
+    global adult, finish
     if request.method == 'GET':
         if request.GET.get('adultchild') =='adult_yes' :
               adult = 1 # adult_yes / adult_no
@@ -42,7 +43,6 @@ def q2(request):
               finish = 1 # finish_yes / finish_no
     return render(request, 'q2.html')
 
-cf = 0 
 
 
 
@@ -119,36 +119,7 @@ def loading(request):
     return render(request, 'loading.html')
 
 
-def result(request):
-    return render(request, 'result.html')
-    
-'''
-# (2차수정)
-
-# 장바구니 플로우 정리
-#(상황1)
-# 1. 평점을 등록하고나서 선택 버튼을 누른다. -> 인덱스, 평점이 어떤 리스트 안에 담김.
-# 2. 이 리스트를 장바구니 페이지에 우리가 만든 데이터프레임 변수에 넣는다. (novel_list)
-
-#(상황1-2)
-# 1. 장바구니를 클릭해서 확인 -> 지금까지 매긴 작품 이름, 평점 누적되어 출력되어야 함.
-
-#(상황2_삭제)
-# 1. 장바구니를 클릭해서 확인 -> 지금까지 매긴 작품 이름, 평점 누적되어 출력되어야 함.
-# 2. 작품 이름, 평점 옆에 있는 (삭제) 버튼을 누른다. -> 삭제되는 작품의 인덱스를 받아서 해당 데이터를 데이터프레임에서 삭제함. (novel_delete)
-
-### 이후에, '다음' 버튼을 누르면 -> 최종 데이터프레임이 유저 변수가 되어서 추천으로 넘어감.
-
-################################################
-
-# 유저 데이터프레임 생성
-user = pd.DataFrame({'ID' : ['user']*len(cart_result) , 'novelindex' : [0]*len(cart_result) , '평점' : [0]*len(cart_result) })
-
-for i in range(len(cart_result)) : 
-     user['novelindex'][i] = cart_result[i]['index']
-     user['평점'][i] = cart_result[i]['rating']
-
-
+# 추천시스템
 like = dict_user[0]
 avgrating = dict_user[1]
 totalreview = dict_user[2]
@@ -156,62 +127,71 @@ purchase = dict_user[3]
 waiting = dict_user[4]
 keywords = dict_user[5]
 
+# 유저 데이터프레임 생성
+def makeUserDF():
+    user = pd.DataFrame({'ID' : ['user']*len(cart_result) , 'novelindex' : [0]*len(cart_result) , '평점' : [0]*len(cart_result) })
+    for i in range(len(cart_result)): 
+        user['novelindex'][i] = cart_result[i]['index']
+        user['평점'][i] = cart_result[i]['rating']
+    return user
 
+## 1. 성인, 완결 필터링
+def filtering():
+    a = [] # 리뷰에서도 작품을 제외하기 위한 list -> 이 안의 작품들은 리뷰에서 지워짐
+    f = []
 
-## 1. 성인, 완결 필터링 ##
-a = [] # 리뷰에서도 작품을 제외하기 위한 list -> 이 안의 작품들은 리뷰에서 지워짐
-f = []
+    if adult == 0:
+        a = novel[novel['성인'] == True].index.tolist()
+        
+    if finish == 1:
+        f = novel[novel['완결'] == False].index.tolist()
 
-if adult == 1:
-    a = novel[novel['성인'] == True].index.tolist()
-    
-if finish == 1:
-    f = novel[novel['완결'] == False].index.tolist()
-    
-# 이중리스트를 제거하고 중복 값 삭제
-f_book = list(set(sum([a, f], [])))
+    # 이중리스트를 제거하고 중복 값 삭제
+    f_book = list(set(sum([a, f], [])))
 
-# 리뷰에서 필터링된(f_book) 작품 제거
-idx_del_review = review[review['novelindex'].isin(f_book)].index
-idx_del_novel = novel[novel['novelindex'].isin(f_book)].index
+    # 리뷰에서 필터링된(f_book) 작품 제거
+    idx_del_review = review[review['novelindex'].isin(f_book)].index
+    idx_del_novel = novel[novel['novelindex'].isin(f_book)].index
 
-review_new = review.drop(idx_del_review)
-novel_new = novel.drop(idx_del_novel)
+    review_new = review.drop(idx_del_review)
+    novel_new = novel.drop(idx_del_novel)
 
-##2. CB##
-indices = pd.Series(novel['제목'])
-cos = np.array(cos)
+    return review_new, novel_new
 
-def recommended_wn_each(title, cosine_sim = cos):
-
+## 2. CB
+def recommended_wn_each(title, novel_new):
     recommended_wn = []
+    indices = pd.Series(novel['제목'])
+
     idx = indices[indices == title].index[0]
-    score_google = pd.Series(cos[idx]).iloc[novel.index].sort_values(ascending = False)
-    score_google=score_google.iloc[novel.index]
+    score_google = pd.Series(cos[idx]).iloc[novel_new.index].sort_values(ascending = False)
+    score_google=score_google.iloc[novel_new.index]
     top_10_indices = score_google.iloc[2:11].index  
     
     for i in top_10_indices:
-        recommended_wn.append(novel['제목'][i])
+        recommended_wn.append(novel_new['제목'][i])
         
     return recommended_wn
 
-def cb_recommend_all(index):
+def cb_recommend_all(index, novel_new):
     topn=[]
-    title_list = list(novel['제목'].iloc[user['novelindex']])
+    title_list = list(novel_new['제목'].iloc[index])
     for i in title_list :
-        for j in recommended_wn_each(i) :
+        for j in recommended_wn_each(i, novel_new):
             topn.append(j)
     return list(set(topn))
 
-def top_10(index) : 
-    
+def top_10(index, novel_new):
+    waiting = dict_user[4]
+    keywords = dict_user[5]
+
     cb = 0 
-    
-    list_topn = cb_recommend_all(index)
+    scaler = MinMaxScaler()
+    list_topn = cb_recommend_all(index, novel_new)
     list_gidamoo = [] 
-    for i in range(len(novel)) : 
-        if novel['제목'][i] in list_topn : 
-            list_gidamoo.append((i,novel['제목'][i],novel['기다무'][i], novel['무료공개'][i],novel['가중평균'][i]))
+    for i in range(len(novel_new)) : 
+        if novel_new['제목'][i] in list_topn : 
+            list_gidamoo.append((i,novel_new['제목'][i],novel_new['기다무'][i], novel_new['무료공개'][i],novel_new['가중평균'][i]))
   
     df=pd.DataFrame({x[0]:x[1:] for x in list_gidamoo}).T.reset_index()
     df.columns = ['index','제목','기다무','무료공개','가중평균']
@@ -226,13 +206,160 @@ def top_10(index) :
         cb += 1
     
     if keywords == 1:
-        
         cb += 2
 
     return df[['index','제목','가중평균']].sort_values(by = '가중평균', ascending= False)[:2+cb]['index'].tolist()
 
-cb_recmm=top_10(user['novelindex'])
+def CB(user, novel_new):
+    global cos
+    cos = np.array(cos)
+    cb_recmm=top_10(user['novelindex'], novel_new)
+    return cb_recmm
 
+## 3. CF
+# 예측 평점을 구하는 함수, R(u, i)에 관한 식
+def predict_rating(ratings_arr, item_sim_arr):
+    ratings_pred = ratings_arr.dot(item_sim_arr) / np.array([np.abs(item_sim_arr).sum(axis=1)])
+    return ratings_pred
+
+def cf_predict(user, review_new, ID):
+    review_user = pd.concat([user, review_new], axis = 0)
+
+    # user rating matrix
+    ratings = review_user.pivot_table('평점', index = 'ID', columns = 'novelindex')
+    ratings = ratings.fillna(0) # 없는 평점은 0으로
+
+    # item dim_df -> 영화간 유사도 계산
+    ratings_T = ratings.transpose()
+    item_sim = cosine_similarity(ratings_T, ratings_T)
+    item_sim_df = pd.DataFrame(data = item_sim, index = ratings.columns, columns = ratings.columns)
+
+    predict = predict_rating(ratings, item_sim_df)
+    unseen_lst = unseen_item(ratings, ID)
+
+    return predict, unseen_lst
+
+# 유저가 보지 않은 소설 반환
+def unseen_item(ratings, ID):
+    user_rating = ratings.loc[ID, :]
+    already_seen = user_rating[user_rating>0].index.tolist()
+    
+    novel_list = ratings.columns.tolist()
+    unseen_list = [novel for novel in novel_list if novel not in already_seen]
+    
+    return unseen_list
+
+# 추천
+def cf_item_recomm(pred_df, ID, unseen_list, top_n=10):
+    recomm_novel = pred_df.loc[ID, unseen_list].sort_values(ascending=False)[:top_n]
+    return recomm_novel
+
+def CF(user, review_new, novel_new):
+    like = dict_user[0]
+    avgrating = dict_user[1]
+    totalreview = dict_user[2]
+    purchase = dict_user[3]
+
+    cf = 0
+    scaler = MinMaxScaler()
+
+    # review에 없는 작품 index list에 append
+    d = review_new.novelindex.sort_values().unique().tolist()
+    x = range(0, len(novel_new))
+    nonereview = []
+
+    sd = sum(d)
+    xd = sum(x)
+
+    for i in x: 
+        if i not in d:
+            nonereview.append(i)
+
+    if like == 1:
+        like_scale = scaler.fit_transform(novel_new[['좋아요수']]) + 1
+        like_scale = sum(like_scale.tolist(), [])
+        
+        # 계산된 가중치에서 rating table에 없는 것들 제외(행렬곱을 위함)
+        for index in sorted(nonereview, reverse = True):
+            del like_scale[index]
+        
+        cf += 1
+
+    if avgrating == 1:
+        avgrating_scale = scaler.fit_transform(novel_new[['평균별점']]) + 1
+        avgrating_scale = sum(avgrating_scale.tolist(), [])
+        
+        for index in sorted(nonereview, reverse = True):
+            del avgrating_scale[index]
+            
+        cf += 1
+
+    if totalreview == 1:
+        totalreview_scale = scaler.fit_transform(novel_new[['전체리뷰수']]) + 1
+        totalreview_scale = sum(totalreview_scale.tolist(), [])
+        
+        for index in sorted(nonereview, reverse = True):
+            del totalreview_scale[index]
+        
+        cf += 1
+        
+    if purchase == 1:
+        purchase_scale = scaler.fit_transform(novel_new[['구매자수']]) + 1
+        purchase_scale = sum(purchase_scale.tolist(), [])
+        
+        for index in sorted(nonereview, reverse = True):
+            del purchase_scale[index]
+        
+        cf += 1
+
+    ID = 'user'
+    predict, unseen_lst = cf_predict(user, review_new, ID)
+
+        # 가중치 부여 
+    if like == 1:
+        predict * np.array(like_scale)
+
+    if avgrating == 1:
+        predict * np.array(avgrating_scale)
+
+    if purchase == 1:
+        predict * np.array(purchase_scale)
+
+    if totalreview == 1:
+        predict * np.array(totalreview_scale)
+
+    recomm_novel = cf_item_recomm(predict, ID, unseen_lst, top_n = 2 + cf)
+    cf_recmm = recomm_novel.index.tolist()
+
+    return cf_recmm
+
+
+def result(request):
+    user = makeUserDF()
+    review_new, novel_new = filtering()
+
+    cb_recmm = CB(user, novel_new)
+    cf_recmm = CF(user, review_new, novel_new)
+    recmm_idx = cb_recmm + cf_recmm
+
+    recmm_result = [] # 프론트에서 접근 가능한 형태로 변환
+    for i in recmm_idx:
+        idx_dict = {
+                    'index' : i,
+                    'image' : novel.loc[i,'썸네일'], 
+                    'title' : novel.loc[i,'제목'],
+                    'author': novel.loc[i,'작가'],
+                    'genre' : novel.loc[i,'장르'],
+                    'url' : novel.loc[i, '링크']
+                }
+        recmm_result.append(idx_dict)
+    return render(request, 'result.html', {'recmm_result' : recmm_result})
+
+
+
+
+
+'''
 ##2. CF##
 # review에 없는 작품 index list에 append
 d = review.novelindex.sort_values().unique().tolist()

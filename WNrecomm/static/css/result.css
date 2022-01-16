@@ -1,7 +1,22 @@
+:root {
+    --main-color: #796BD3;
+    --accent-color: #FFE588;
+    --sub-color: #C1BBE7;
+    --bg-color: #FFFFFF;
+}
+
 .r_text{
     margin-top: 30px;
     font-style: normal;
     font-weight: bold;
     font-size: 28px;
     color: var(--bg-color);
+}
+
+.ridi{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color:var(--main-color);
+    text-align: center;
 }

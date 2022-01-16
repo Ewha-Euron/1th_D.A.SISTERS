@@ -37,8 +37,9 @@
 }
 
 table{
+    margin-bottom: 50px;
     border-collapse: separate;
-    border-spacing:0 20px;
+    border-spacing:0 15px;
 }
 
 .thumbnail{

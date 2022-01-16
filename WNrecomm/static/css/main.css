@@ -151,9 +151,9 @@ body{
 
 .next_btn, .home_btn{
     height: 7vh;    
-    position: absolute;
+    position: fixed;
     /* top:550px; */
-    bottom: 33.2vh;
+    bottom: 20px;
     right:4.43vw;
     transition: all 0.3s ease 0s;
 }
@@ -172,4 +172,5 @@ body{
     right: 0px;
     top: 30vh;
     padding: 7.81vw;
+    overflow:auto;
 }
