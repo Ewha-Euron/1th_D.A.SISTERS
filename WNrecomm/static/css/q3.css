@@ -90,12 +90,12 @@ table{
     color:var(--main-color);
 }
   
-.star-rating label:hover,
-.star-rating label:hover ~ label {
+.star_active label:hover,
+.star_active label:hover ~ label {
     color:#aba3d8;
 }
 
-.add_btn{
+.add_btn, .delete_btn{
     border:1px solid var(--main-color);
     border-radius: 5px;
     float:right;
