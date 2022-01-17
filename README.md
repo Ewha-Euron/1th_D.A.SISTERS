@@ -4,7 +4,7 @@
 
 <img src="https://user-images.githubusercontent.com/77307201/149685598-3e0f59b3-861f-492e-98ed-a2800e46d139.png" width="60%" height="50%"/>
 
-추천시스템 이론을 학습하고, 리디북스 데이터를 활용하여 가중치 하이브리드 추천시스템을 구현하였습니다. 
+리디북스 데이터를 활용하여 가중치 하이브리드 추천시스템을 구축하였고, 이를 웹 애플리케이션 형태로 구현하였습니다. 
 <details>
 <summary> 스터디 </summary>
 <div markdown="1">   
